@@ -1,0 +1,8 @@
+[
+{
+  "directory": "/Users/vipuldevnani/first_grpc_project/build",
+  "command": "/usr/bin/c++  -I/Users/vipuldevnani/first_grpc_project/CMAKE_SOURCE_DIR/include -g -arch arm64 -o CMakeFiles/first_grpc_project.dir/src/main.cpp.o -c /Users/vipuldevnani/first_grpc_project/src/main.cpp",
+  "file": "/Users/vipuldevnani/first_grpc_project/src/main.cpp",
+  "output": "CMakeFiles/first_grpc_project.dir/src/main.cpp.o"
+}
+]
