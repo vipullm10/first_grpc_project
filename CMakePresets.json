@@ -1,0 +1,20 @@
+{
+  "version": 3,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 16,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "default",
+      "hidden": false,
+      "generator": "Unix Makefiles",
+      "binaryDir": "${workspaceFolder}/build",
+      "cacheVariables": {
+        "CMAKE_PREFIX_PATH": "/Users/vipuldevnani/grpc_install",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
+      }
+    }
+  ]
+}

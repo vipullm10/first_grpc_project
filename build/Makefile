@@ -117,41 +117,152 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named first_grpc_project
+# Target rules for targets named generate_grpc_files
 
 # Build rule for target.
-first_grpc_project: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 first_grpc_project
-.PHONY : first_grpc_project
+generate_grpc_files: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 generate_grpc_files
+.PHONY : generate_grpc_files
 
 # fast build rule for target.
-first_grpc_project/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/first_grpc_project.dir/build.make CMakeFiles/first_grpc_project.dir/build
-.PHONY : first_grpc_project/fast
+generate_grpc_files/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/generate_grpc_files.dir/build.make CMakeFiles/generate_grpc_files.dir/build
+.PHONY : generate_grpc_files/fast
 
-src/main.o: src/main.cpp.o
-.PHONY : src/main.o
+#=============================================================================
+# Target rules for targets named fgp_grpc_proto
+
+# Build rule for target.
+fgp_grpc_proto: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 fgp_grpc_proto
+.PHONY : fgp_grpc_proto
+
+# fast build rule for target.
+fgp_grpc_proto/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/fgp_grpc_proto.dir/build.make CMakeFiles/fgp_grpc_proto.dir/build
+.PHONY : fgp_grpc_proto/fast
+
+#=============================================================================
+# Target rules for targets named server
+
+# Build rule for target.
+server: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 server
+.PHONY : server
+
+# fast build rule for target.
+server/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/build
+.PHONY : server/fast
+
+#=============================================================================
+# Target rules for targets named client
+
+# Build rule for target.
+client: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 client
+.PHONY : client
+
+# fast build rule for target.
+client/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/build
+.PHONY : client/fast
+
+src/client.o: src/client.cpp.o
+.PHONY : src/client.o
 
 # target to build an object file
-src/main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/first_grpc_project.dir/build.make CMakeFiles/first_grpc_project.dir/src/main.cpp.o
-.PHONY : src/main.cpp.o
+src/client.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client.cpp.o
+.PHONY : src/client.cpp.o
 
-src/main.i: src/main.cpp.i
-.PHONY : src/main.i
+src/client.i: src/client.cpp.i
+.PHONY : src/client.i
 
 # target to preprocess a source file
-src/main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/first_grpc_project.dir/build.make CMakeFiles/first_grpc_project.dir/src/main.cpp.i
-.PHONY : src/main.cpp.i
+src/client.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client.cpp.i
+.PHONY : src/client.cpp.i
 
-src/main.s: src/main.cpp.s
-.PHONY : src/main.s
+src/client.s: src/client.cpp.s
+.PHONY : src/client.s
 
 # target to generate assembly for a file
-src/main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/first_grpc_project.dir/build.make CMakeFiles/first_grpc_project.dir/src/main.cpp.s
-.PHONY : src/main.cpp.s
+src/client.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client.cpp.s
+.PHONY : src/client.cpp.s
+
+src/first_grpc_project.grpc.pb.o: src/first_grpc_project.grpc.pb.cc.o
+.PHONY : src/first_grpc_project.grpc.pb.o
+
+# target to build an object file
+src/first_grpc_project.grpc.pb.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/fgp_grpc_proto.dir/build.make CMakeFiles/fgp_grpc_proto.dir/src/first_grpc_project.grpc.pb.cc.o
+.PHONY : src/first_grpc_project.grpc.pb.cc.o
+
+src/first_grpc_project.grpc.pb.i: src/first_grpc_project.grpc.pb.cc.i
+.PHONY : src/first_grpc_project.grpc.pb.i
+
+# target to preprocess a source file
+src/first_grpc_project.grpc.pb.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/fgp_grpc_proto.dir/build.make CMakeFiles/fgp_grpc_proto.dir/src/first_grpc_project.grpc.pb.cc.i
+.PHONY : src/first_grpc_project.grpc.pb.cc.i
+
+src/first_grpc_project.grpc.pb.s: src/first_grpc_project.grpc.pb.cc.s
+.PHONY : src/first_grpc_project.grpc.pb.s
+
+# target to generate assembly for a file
+src/first_grpc_project.grpc.pb.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/fgp_grpc_proto.dir/build.make CMakeFiles/fgp_grpc_proto.dir/src/first_grpc_project.grpc.pb.cc.s
+.PHONY : src/first_grpc_project.grpc.pb.cc.s
+
+src/first_grpc_project.pb.o: src/first_grpc_project.pb.cc.o
+.PHONY : src/first_grpc_project.pb.o
+
+# target to build an object file
+src/first_grpc_project.pb.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/fgp_grpc_proto.dir/build.make CMakeFiles/fgp_grpc_proto.dir/src/first_grpc_project.pb.cc.o
+.PHONY : src/first_grpc_project.pb.cc.o
+
+src/first_grpc_project.pb.i: src/first_grpc_project.pb.cc.i
+.PHONY : src/first_grpc_project.pb.i
+
+# target to preprocess a source file
+src/first_grpc_project.pb.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/fgp_grpc_proto.dir/build.make CMakeFiles/fgp_grpc_proto.dir/src/first_grpc_project.pb.cc.i
+.PHONY : src/first_grpc_project.pb.cc.i
+
+src/first_grpc_project.pb.s: src/first_grpc_project.pb.cc.s
+.PHONY : src/first_grpc_project.pb.s
+
+# target to generate assembly for a file
+src/first_grpc_project.pb.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/fgp_grpc_proto.dir/build.make CMakeFiles/fgp_grpc_proto.dir/src/first_grpc_project.pb.cc.s
+.PHONY : src/first_grpc_project.pb.cc.s
+
+src/server.o: src/server.cpp.o
+.PHONY : src/server.o
+
+# target to build an object file
+src/server.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/server.cpp.o
+.PHONY : src/server.cpp.o
+
+src/server.i: src/server.cpp.i
+.PHONY : src/server.i
+
+# target to preprocess a source file
+src/server.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/server.cpp.i
+.PHONY : src/server.cpp.i
+
+src/server.s: src/server.cpp.s
+.PHONY : src/server.s
+
+# target to generate assembly for a file
+src/server.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/server.cpp.s
+.PHONY : src/server.cpp.s
 
 # Help Target
 help:
@@ -161,10 +272,22 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... first_grpc_project"
-	@echo "... src/main.o"
-	@echo "... src/main.i"
-	@echo "... src/main.s"
+	@echo "... generate_grpc_files"
+	@echo "... client"
+	@echo "... fgp_grpc_proto"
+	@echo "... server"
+	@echo "... src/client.o"
+	@echo "... src/client.i"
+	@echo "... src/client.s"
+	@echo "... src/first_grpc_project.grpc.pb.o"
+	@echo "... src/first_grpc_project.grpc.pb.i"
+	@echo "... src/first_grpc_project.grpc.pb.s"
+	@echo "... src/first_grpc_project.pb.o"
+	@echo "... src/first_grpc_project.pb.i"
+	@echo "... src/first_grpc_project.pb.s"
+	@echo "... src/server.o"
+	@echo "... src/server.i"
+	@echo "... src/server.s"
 .PHONY : help
 
 

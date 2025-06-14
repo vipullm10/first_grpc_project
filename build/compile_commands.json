@@ -1,8 +1,26 @@
 [
 {
   "directory": "/Users/vipuldevnani/first_grpc_project/build",
-  "command": "/usr/bin/c++  -I/Users/vipuldevnani/first_grpc_project/CMAKE_SOURCE_DIR/include -g -arch arm64 -o CMakeFiles/first_grpc_project.dir/src/main.cpp.o -c /Users/vipuldevnani/first_grpc_project/src/main.cpp",
-  "file": "/Users/vipuldevnani/first_grpc_project/src/main.cpp",
-  "output": "CMakeFiles/first_grpc_project.dir/src/main.cpp.o"
+  "command": "/usr/bin/c++ -DCARES_STATICLIB -I/Users/vipuldevnani/first_grpc_project/include -isystem /Users/vipuldevnani/grpc_install/include -std=gnu++17 -arch arm64 -o CMakeFiles/fgp_grpc_proto.dir/src/first_grpc_project.pb.cc.o -c /Users/vipuldevnani/first_grpc_project/src/first_grpc_project.pb.cc",
+  "file": "/Users/vipuldevnani/first_grpc_project/src/first_grpc_project.pb.cc",
+  "output": "CMakeFiles/fgp_grpc_proto.dir/src/first_grpc_project.pb.cc.o"
+},
+{
+  "directory": "/Users/vipuldevnani/first_grpc_project/build",
+  "command": "/usr/bin/c++ -DCARES_STATICLIB -I/Users/vipuldevnani/first_grpc_project/include -isystem /Users/vipuldevnani/grpc_install/include -std=gnu++17 -arch arm64 -o CMakeFiles/fgp_grpc_proto.dir/src/first_grpc_project.grpc.pb.cc.o -c /Users/vipuldevnani/first_grpc_project/src/first_grpc_project.grpc.pb.cc",
+  "file": "/Users/vipuldevnani/first_grpc_project/src/first_grpc_project.grpc.pb.cc",
+  "output": "CMakeFiles/fgp_grpc_proto.dir/src/first_grpc_project.grpc.pb.cc.o"
+},
+{
+  "directory": "/Users/vipuldevnani/first_grpc_project/build",
+  "command": "/usr/bin/c++ -DCARES_STATICLIB -I/Users/vipuldevnani/first_grpc_project/include -isystem /Users/vipuldevnani/grpc_install/include -std=gnu++17 -arch arm64 -o CMakeFiles/server.dir/src/server.cpp.o -c /Users/vipuldevnani/first_grpc_project/src/server.cpp",
+  "file": "/Users/vipuldevnani/first_grpc_project/src/server.cpp",
+  "output": "CMakeFiles/server.dir/src/server.cpp.o"
+},
+{
+  "directory": "/Users/vipuldevnani/first_grpc_project/build",
+  "command": "/usr/bin/c++ -DCARES_STATICLIB -I/Users/vipuldevnani/first_grpc_project/include -isystem /Users/vipuldevnani/grpc_install/include -std=gnu++17 -arch arm64 -o CMakeFiles/client.dir/src/client.cpp.o -c /Users/vipuldevnani/first_grpc_project/src/client.cpp",
+  "file": "/Users/vipuldevnani/first_grpc_project/src/client.cpp",
+  "output": "CMakeFiles/client.dir/src/client.cpp.o"
 }
 ]

@@ -63,11 +63,15 @@ CMAKE_BINARY_DIR = /Users/vipuldevnani/first_grpc_project/build
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all: CMakeFiles/first_grpc_project.dir/all
+all: CMakeFiles/fgp_grpc_proto.dir/all
+all: CMakeFiles/server.dir/all
+all: CMakeFiles/client.dir/all
 .PHONY : all
 
 # The main recursive "codegen" target.
-codegen: CMakeFiles/first_grpc_project.dir/codegen
+codegen: CMakeFiles/fgp_grpc_proto.dir/codegen
+codegen: CMakeFiles/server.dir/codegen
+codegen: CMakeFiles/client.dir/codegen
 .PHONY : codegen
 
 # The main recursive "preinstall" target.
@@ -75,40 +79,141 @@ preinstall:
 .PHONY : preinstall
 
 # The main recursive "clean" target.
-clean: CMakeFiles/first_grpc_project.dir/clean
+clean: CMakeFiles/generate_grpc_files.dir/clean
+clean: CMakeFiles/fgp_grpc_proto.dir/clean
+clean: CMakeFiles/server.dir/clean
+clean: CMakeFiles/client.dir/clean
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/first_grpc_project.dir
+# Target rules for target CMakeFiles/generate_grpc_files.dir
 
 # All Build rule for target.
-CMakeFiles/first_grpc_project.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/first_grpc_project.dir/build.make CMakeFiles/first_grpc_project.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/first_grpc_project.dir/build.make CMakeFiles/first_grpc_project.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/vipuldevnani/first_grpc_project/build/CMakeFiles --progress-num=1,2 "Built target first_grpc_project"
-.PHONY : CMakeFiles/first_grpc_project.dir/all
+CMakeFiles/generate_grpc_files.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/generate_grpc_files.dir/build.make CMakeFiles/generate_grpc_files.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/generate_grpc_files.dir/build.make CMakeFiles/generate_grpc_files.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/vipuldevnani/first_grpc_project/build/CMakeFiles --progress-num=7 "Built target generate_grpc_files"
+.PHONY : CMakeFiles/generate_grpc_files.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/first_grpc_project.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/vipuldevnani/first_grpc_project/build/CMakeFiles 2
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/first_grpc_project.dir/all
+CMakeFiles/generate_grpc_files.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/vipuldevnani/first_grpc_project/build/CMakeFiles 1
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/generate_grpc_files.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/vipuldevnani/first_grpc_project/build/CMakeFiles 0
-.PHONY : CMakeFiles/first_grpc_project.dir/rule
+.PHONY : CMakeFiles/generate_grpc_files.dir/rule
 
 # Convenience name for target.
-first_grpc_project: CMakeFiles/first_grpc_project.dir/rule
-.PHONY : first_grpc_project
+generate_grpc_files: CMakeFiles/generate_grpc_files.dir/rule
+.PHONY : generate_grpc_files
 
 # codegen rule for target.
-CMakeFiles/first_grpc_project.dir/codegen:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/first_grpc_project.dir/build.make CMakeFiles/first_grpc_project.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/vipuldevnani/first_grpc_project/build/CMakeFiles --progress-num=1,2 "Finished codegen for target first_grpc_project"
-.PHONY : CMakeFiles/first_grpc_project.dir/codegen
+CMakeFiles/generate_grpc_files.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/generate_grpc_files.dir/build.make CMakeFiles/generate_grpc_files.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/vipuldevnani/first_grpc_project/build/CMakeFiles --progress-num=7 "Finished codegen for target generate_grpc_files"
+.PHONY : CMakeFiles/generate_grpc_files.dir/codegen
 
 # clean rule for target.
-CMakeFiles/first_grpc_project.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/first_grpc_project.dir/build.make CMakeFiles/first_grpc_project.dir/clean
-.PHONY : CMakeFiles/first_grpc_project.dir/clean
+CMakeFiles/generate_grpc_files.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/generate_grpc_files.dir/build.make CMakeFiles/generate_grpc_files.dir/clean
+.PHONY : CMakeFiles/generate_grpc_files.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/fgp_grpc_proto.dir
+
+# All Build rule for target.
+CMakeFiles/fgp_grpc_proto.dir/all: CMakeFiles/generate_grpc_files.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/fgp_grpc_proto.dir/build.make CMakeFiles/fgp_grpc_proto.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/fgp_grpc_proto.dir/build.make CMakeFiles/fgp_grpc_proto.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/vipuldevnani/first_grpc_project/build/CMakeFiles --progress-num=3,4,5,6 "Built target fgp_grpc_proto"
+.PHONY : CMakeFiles/fgp_grpc_proto.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/fgp_grpc_proto.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/vipuldevnani/first_grpc_project/build/CMakeFiles 5
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/fgp_grpc_proto.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/vipuldevnani/first_grpc_project/build/CMakeFiles 0
+.PHONY : CMakeFiles/fgp_grpc_proto.dir/rule
+
+# Convenience name for target.
+fgp_grpc_proto: CMakeFiles/fgp_grpc_proto.dir/rule
+.PHONY : fgp_grpc_proto
+
+# codegen rule for target.
+CMakeFiles/fgp_grpc_proto.dir/codegen: CMakeFiles/generate_grpc_files.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/fgp_grpc_proto.dir/build.make CMakeFiles/fgp_grpc_proto.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/vipuldevnani/first_grpc_project/build/CMakeFiles --progress-num=3,4,5,6 "Finished codegen for target fgp_grpc_proto"
+.PHONY : CMakeFiles/fgp_grpc_proto.dir/codegen
+
+# clean rule for target.
+CMakeFiles/fgp_grpc_proto.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/fgp_grpc_proto.dir/build.make CMakeFiles/fgp_grpc_proto.dir/clean
+.PHONY : CMakeFiles/fgp_grpc_proto.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/server.dir
+
+# All Build rule for target.
+CMakeFiles/server.dir/all: CMakeFiles/generate_grpc_files.dir/all
+CMakeFiles/server.dir/all: CMakeFiles/fgp_grpc_proto.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/vipuldevnani/first_grpc_project/build/CMakeFiles --progress-num=8,9 "Built target server"
+.PHONY : CMakeFiles/server.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/server.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/vipuldevnani/first_grpc_project/build/CMakeFiles 7
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/server.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/vipuldevnani/first_grpc_project/build/CMakeFiles 0
+.PHONY : CMakeFiles/server.dir/rule
+
+# Convenience name for target.
+server: CMakeFiles/server.dir/rule
+.PHONY : server
+
+# codegen rule for target.
+CMakeFiles/server.dir/codegen: CMakeFiles/generate_grpc_files.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/vipuldevnani/first_grpc_project/build/CMakeFiles --progress-num=8,9 "Finished codegen for target server"
+.PHONY : CMakeFiles/server.dir/codegen
+
+# clean rule for target.
+CMakeFiles/server.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/clean
+.PHONY : CMakeFiles/server.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/client.dir
+
+# All Build rule for target.
+CMakeFiles/client.dir/all: CMakeFiles/generate_grpc_files.dir/all
+CMakeFiles/client.dir/all: CMakeFiles/fgp_grpc_proto.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/vipuldevnani/first_grpc_project/build/CMakeFiles --progress-num=1,2 "Built target client"
+.PHONY : CMakeFiles/client.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/client.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/vipuldevnani/first_grpc_project/build/CMakeFiles 7
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/client.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/vipuldevnani/first_grpc_project/build/CMakeFiles 0
+.PHONY : CMakeFiles/client.dir/rule
+
+# Convenience name for target.
+client: CMakeFiles/client.dir/rule
+.PHONY : client
+
+# codegen rule for target.
+CMakeFiles/client.dir/codegen: CMakeFiles/generate_grpc_files.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/vipuldevnani/first_grpc_project/build/CMakeFiles --progress-num=1,2 "Finished codegen for target client"
+.PHONY : CMakeFiles/client.dir/codegen
+
+# clean rule for target.
+CMakeFiles/client.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/clean
+.PHONY : CMakeFiles/client.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.
