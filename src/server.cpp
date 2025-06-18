@@ -23,6 +23,18 @@ public:
 
         return ::grpc::Status::OK;
     }
+
+    ::grpc::Status getMultiplicationTable(::grpc::ServerContext* context, const ::first_grpc_project::tableRequest* request, ::grpc::ServerWriter< ::first_grpc_project::tableResponse>* writer) override{
+        for(int i=1;i<=request->n();i++){
+            first_grpc_project::tableResponse res;
+            res.set_num(request->num());
+            res.set_n(i);
+            res.set_result(request->num()*i);
+            writer->Write(res);
+        }
+        return ::grpc::Status::OK;
+    }
+
 };
 
 

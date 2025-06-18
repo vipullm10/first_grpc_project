@@ -61,6 +61,14 @@ class addResponse;
 struct addResponseDefaultTypeInternal;
 extern addResponseDefaultTypeInternal _addResponse_default_instance_;
 extern const ::google::protobuf::internal::ClassDataFull addResponse_class_data_;
+class tableRequest;
+struct tableRequestDefaultTypeInternal;
+extern tableRequestDefaultTypeInternal _tableRequest_default_instance_;
+extern const ::google::protobuf::internal::ClassDataFull tableRequest_class_data_;
+class tableResponse;
+struct tableResponseDefaultTypeInternal;
+extern tableResponseDefaultTypeInternal _tableResponse_default_instance_;
+extern const ::google::protobuf::internal::ClassDataFull tableResponse_class_data_;
 }  // namespace first_grpc_project
 namespace google {
 namespace protobuf {
@@ -72,6 +80,424 @@ namespace first_grpc_project {
 // ===================================================================
 
 
+// -------------------------------------------------------------------
+
+class tableResponse final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:first_grpc_project.tableResponse) */ {
+ public:
+  inline tableResponse() : tableResponse(nullptr) {}
+  ~tableResponse() PROTOBUF_FINAL;
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+  void operator delete(tableResponse* PROTOBUF_NONNULL msg, std::destroying_delete_t) {
+    SharedDtor(*msg);
+    ::google::protobuf::internal::SizedDelete(msg, sizeof(tableResponse));
+  }
+#endif
+
+  template <typename = void>
+  explicit PROTOBUF_CONSTEXPR tableResponse(::google::protobuf::internal::ConstantInitialized);
+
+  inline tableResponse(const tableResponse& from) : tableResponse(nullptr, from) {}
+  inline tableResponse(tableResponse&& from) noexcept
+      : tableResponse(nullptr, std::move(from)) {}
+  inline tableResponse& operator=(const tableResponse& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline tableResponse& operator=(tableResponse&& from) noexcept {
+    if (this == &from) return *this;
+    if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* PROTOBUF_NONNULL mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
+
+  static const ::google::protobuf::Descriptor* PROTOBUF_NONNULL descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* PROTOBUF_NONNULL GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* PROTOBUF_NONNULL GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const tableResponse& default_instance() {
+    return *reinterpret_cast<const tableResponse*>(
+        &_tableResponse_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages = 3;
+  friend void swap(tableResponse& a, tableResponse& b) { a.Swap(&b); }
+  inline void Swap(tableResponse* PROTOBUF_NONNULL other) {
+    if (other == this) return;
+    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(tableResponse* PROTOBUF_NONNULL other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  tableResponse* PROTOBUF_NONNULL New(::google::protobuf::Arena* PROTOBUF_NULLABLE arena = nullptr) const {
+    return ::google::protobuf::Message::DefaultConstruct<tableResponse>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const tableResponse& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom(const tableResponse& from) { tableResponse::MergeImpl(*this, from); }
+
+  private:
+  static void MergeImpl(::google::protobuf::MessageLite& to_msg,
+                        const ::google::protobuf::MessageLite& from_msg);
+
+  public:
+  bool IsInitialized() const {
+    return true;
+  }
+  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
+  #if defined(PROTOBUF_CUSTOM_VTABLE)
+  private:
+  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
+  static ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
+      const ::google::protobuf::MessageLite& msg, ::uint8_t* PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream);
+
+  public:
+  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
+  ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
+      ::uint8_t* PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const {
+    return _InternalSerialize(*this, target, stream);
+  }
+  #else   // PROTOBUF_CUSTOM_VTABLE
+  ::size_t ByteSizeLong() const final;
+  ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
+      ::uint8_t* PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const final;
+  #endif  // PROTOBUF_CUSTOM_VTABLE
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+  static void SharedDtor(MessageLite& self);
+  void InternalSwap(tableResponse* PROTOBUF_NONNULL other);
+ private:
+  template <typename T>
+  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::absl::string_view FullMessageName() { return "first_grpc_project.tableResponse"; }
+
+ protected:
+  explicit tableResponse(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+  tableResponse(::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const tableResponse& from);
+  tableResponse(
+      ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, tableResponse&& from) noexcept
+      : tableResponse(arena) {
+    *this = ::std::move(from);
+  }
+  const ::google::protobuf::internal::ClassData* PROTOBUF_NONNULL GetClassData() const PROTOBUF_FINAL;
+  static void* PROTOBUF_NONNULL PlacementNew_(
+      const void* PROTOBUF_NONNULL, void* PROTOBUF_NONNULL mem,
+      ::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+  static constexpr auto InternalNewImpl_();
+
+ public:
+  static constexpr auto InternalGenerateClassData_();
+
+  ::google::protobuf::Metadata GetMetadata() const;
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+  enum : int {
+    kNumFieldNumber = 1,
+    kNFieldNumber = 2,
+    kResultFieldNumber = 3,
+  };
+  // int32 num = 1;
+  void clear_num() ;
+  ::int32_t num() const;
+  void set_num(::int32_t value);
+
+  private:
+  ::int32_t _internal_num() const;
+  void _internal_set_num(::int32_t value);
+
+  public:
+  // int32 n = 2;
+  void clear_n() ;
+  ::int32_t n() const;
+  void set_n(::int32_t value);
+
+  private:
+  ::int32_t _internal_n() const;
+  void _internal_set_n(::int32_t value);
+
+  public:
+  // int32 result = 3;
+  void clear_result() ;
+  ::int32_t result() const;
+  void set_result(::int32_t value);
+
+  private:
+  ::int32_t _internal_result() const;
+  void _internal_set_result(::int32_t value);
+
+  public:
+  // @@protoc_insertion_point(class_scope:first_grpc_project.tableResponse)
+ private:
+  class _Internal;
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<2, 3,
+                                   0, 0,
+                                   2>
+      _table_;
+
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+    inline explicit constexpr Impl_(::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit Impl_(
+        ::google::protobuf::internal::InternalVisibility visibility,
+        ::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+    inline explicit Impl_(
+        ::google::protobuf::internal::InternalVisibility visibility,
+        ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const Impl_& from,
+        const tableResponse& from_msg);
+    ::google::protobuf::internal::HasBits<1> _has_bits_;
+    ::google::protobuf::internal::CachedSize _cached_size_;
+    ::int32_t num_;
+    ::int32_t n_;
+    ::int32_t result_;
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_first_5fgrpc_5fproject_2eproto;
+};
+
+extern const ::google::protobuf::internal::ClassDataFull tableResponse_class_data_;
+// -------------------------------------------------------------------
+
+class tableRequest final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:first_grpc_project.tableRequest) */ {
+ public:
+  inline tableRequest() : tableRequest(nullptr) {}
+  ~tableRequest() PROTOBUF_FINAL;
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+  void operator delete(tableRequest* PROTOBUF_NONNULL msg, std::destroying_delete_t) {
+    SharedDtor(*msg);
+    ::google::protobuf::internal::SizedDelete(msg, sizeof(tableRequest));
+  }
+#endif
+
+  template <typename = void>
+  explicit PROTOBUF_CONSTEXPR tableRequest(::google::protobuf::internal::ConstantInitialized);
+
+  inline tableRequest(const tableRequest& from) : tableRequest(nullptr, from) {}
+  inline tableRequest(tableRequest&& from) noexcept
+      : tableRequest(nullptr, std::move(from)) {}
+  inline tableRequest& operator=(const tableRequest& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline tableRequest& operator=(tableRequest&& from) noexcept {
+    if (this == &from) return *this;
+    if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* PROTOBUF_NONNULL mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
+
+  static const ::google::protobuf::Descriptor* PROTOBUF_NONNULL descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* PROTOBUF_NONNULL GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* PROTOBUF_NONNULL GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const tableRequest& default_instance() {
+    return *reinterpret_cast<const tableRequest*>(
+        &_tableRequest_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages = 2;
+  friend void swap(tableRequest& a, tableRequest& b) { a.Swap(&b); }
+  inline void Swap(tableRequest* PROTOBUF_NONNULL other) {
+    if (other == this) return;
+    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(tableRequest* PROTOBUF_NONNULL other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  tableRequest* PROTOBUF_NONNULL New(::google::protobuf::Arena* PROTOBUF_NULLABLE arena = nullptr) const {
+    return ::google::protobuf::Message::DefaultConstruct<tableRequest>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const tableRequest& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom(const tableRequest& from) { tableRequest::MergeImpl(*this, from); }
+
+  private:
+  static void MergeImpl(::google::protobuf::MessageLite& to_msg,
+                        const ::google::protobuf::MessageLite& from_msg);
+
+  public:
+  bool IsInitialized() const {
+    return true;
+  }
+  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
+  #if defined(PROTOBUF_CUSTOM_VTABLE)
+  private:
+  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
+  static ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
+      const ::google::protobuf::MessageLite& msg, ::uint8_t* PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream);
+
+  public:
+  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
+  ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
+      ::uint8_t* PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const {
+    return _InternalSerialize(*this, target, stream);
+  }
+  #else   // PROTOBUF_CUSTOM_VTABLE
+  ::size_t ByteSizeLong() const final;
+  ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
+      ::uint8_t* PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const final;
+  #endif  // PROTOBUF_CUSTOM_VTABLE
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+  static void SharedDtor(MessageLite& self);
+  void InternalSwap(tableRequest* PROTOBUF_NONNULL other);
+ private:
+  template <typename T>
+  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::absl::string_view FullMessageName() { return "first_grpc_project.tableRequest"; }
+
+ protected:
+  explicit tableRequest(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+  tableRequest(::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const tableRequest& from);
+  tableRequest(
+      ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, tableRequest&& from) noexcept
+      : tableRequest(arena) {
+    *this = ::std::move(from);
+  }
+  const ::google::protobuf::internal::ClassData* PROTOBUF_NONNULL GetClassData() const PROTOBUF_FINAL;
+  static void* PROTOBUF_NONNULL PlacementNew_(
+      const void* PROTOBUF_NONNULL, void* PROTOBUF_NONNULL mem,
+      ::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+  static constexpr auto InternalNewImpl_();
+
+ public:
+  static constexpr auto InternalGenerateClassData_();
+
+  ::google::protobuf::Metadata GetMetadata() const;
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+  enum : int {
+    kNumFieldNumber = 1,
+    kNFieldNumber = 2,
+  };
+  // int32 num = 1;
+  void clear_num() ;
+  ::int32_t num() const;
+  void set_num(::int32_t value);
+
+  private:
+  ::int32_t _internal_num() const;
+  void _internal_set_num(::int32_t value);
+
+  public:
+  // int32 n = 2;
+  void clear_n() ;
+  ::int32_t n() const;
+  void set_n(::int32_t value);
+
+  private:
+  ::int32_t _internal_n() const;
+  void _internal_set_n(::int32_t value);
+
+  public:
+  // @@protoc_insertion_point(class_scope:first_grpc_project.tableRequest)
+ private:
+  class _Internal;
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<1, 2,
+                                   0, 0,
+                                   2>
+      _table_;
+
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+    inline explicit constexpr Impl_(::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit Impl_(
+        ::google::protobuf::internal::InternalVisibility visibility,
+        ::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+    inline explicit Impl_(
+        ::google::protobuf::internal::InternalVisibility visibility,
+        ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const Impl_& from,
+        const tableRequest& from_msg);
+    ::google::protobuf::internal::HasBits<1> _has_bits_;
+    ::google::protobuf::internal::CachedSize _cached_size_;
+    ::int32_t num_;
+    ::int32_t n_;
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_first_5fgrpc_5fproject_2eproto;
+};
+
+extern const ::google::protobuf::internal::ClassDataFull tableRequest_class_data_;
 // -------------------------------------------------------------------
 
 class addResponse final : public ::google::protobuf::Message
@@ -555,6 +981,134 @@ inline ::int32_t addResponse::_internal_result() const {
   return _impl_.result_;
 }
 inline void addResponse::_internal_set_result(::int32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.result_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// tableRequest
+
+// int32 num = 1;
+inline void tableRequest::clear_num() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.num_ = 0;
+  _impl_._has_bits_[0] &= ~0x00000001u;
+}
+inline ::int32_t tableRequest::num() const {
+  // @@protoc_insertion_point(field_get:first_grpc_project.tableRequest.num)
+  return _internal_num();
+}
+inline void tableRequest::set_num(::int32_t value) {
+  _internal_set_num(value);
+  _impl_._has_bits_[0] |= 0x00000001u;
+  // @@protoc_insertion_point(field_set:first_grpc_project.tableRequest.num)
+}
+inline ::int32_t tableRequest::_internal_num() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.num_;
+}
+inline void tableRequest::_internal_set_num(::int32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.num_ = value;
+}
+
+// int32 n = 2;
+inline void tableRequest::clear_n() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.n_ = 0;
+  _impl_._has_bits_[0] &= ~0x00000002u;
+}
+inline ::int32_t tableRequest::n() const {
+  // @@protoc_insertion_point(field_get:first_grpc_project.tableRequest.n)
+  return _internal_n();
+}
+inline void tableRequest::set_n(::int32_t value) {
+  _internal_set_n(value);
+  _impl_._has_bits_[0] |= 0x00000002u;
+  // @@protoc_insertion_point(field_set:first_grpc_project.tableRequest.n)
+}
+inline ::int32_t tableRequest::_internal_n() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.n_;
+}
+inline void tableRequest::_internal_set_n(::int32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.n_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// tableResponse
+
+// int32 num = 1;
+inline void tableResponse::clear_num() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.num_ = 0;
+  _impl_._has_bits_[0] &= ~0x00000001u;
+}
+inline ::int32_t tableResponse::num() const {
+  // @@protoc_insertion_point(field_get:first_grpc_project.tableResponse.num)
+  return _internal_num();
+}
+inline void tableResponse::set_num(::int32_t value) {
+  _internal_set_num(value);
+  _impl_._has_bits_[0] |= 0x00000001u;
+  // @@protoc_insertion_point(field_set:first_grpc_project.tableResponse.num)
+}
+inline ::int32_t tableResponse::_internal_num() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.num_;
+}
+inline void tableResponse::_internal_set_num(::int32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.num_ = value;
+}
+
+// int32 n = 2;
+inline void tableResponse::clear_n() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.n_ = 0;
+  _impl_._has_bits_[0] &= ~0x00000002u;
+}
+inline ::int32_t tableResponse::n() const {
+  // @@protoc_insertion_point(field_get:first_grpc_project.tableResponse.n)
+  return _internal_n();
+}
+inline void tableResponse::set_n(::int32_t value) {
+  _internal_set_n(value);
+  _impl_._has_bits_[0] |= 0x00000002u;
+  // @@protoc_insertion_point(field_set:first_grpc_project.tableResponse.n)
+}
+inline ::int32_t tableResponse::_internal_n() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.n_;
+}
+inline void tableResponse::_internal_set_n(::int32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.n_ = value;
+}
+
+// int32 result = 3;
+inline void tableResponse::clear_result() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.result_ = 0;
+  _impl_._has_bits_[0] &= ~0x00000004u;
+}
+inline ::int32_t tableResponse::result() const {
+  // @@protoc_insertion_point(field_get:first_grpc_project.tableResponse.result)
+  return _internal_result();
+}
+inline void tableResponse::set_result(::int32_t value) {
+  _internal_set_result(value);
+  _impl_._has_bits_[0] |= 0x00000004u;
+  // @@protoc_insertion_point(field_set:first_grpc_project.tableResponse.result)
+}
+inline ::int32_t tableResponse::_internal_result() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.result_;
+}
+inline void tableResponse::_internal_set_result(::int32_t value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.result_ = value;
 }

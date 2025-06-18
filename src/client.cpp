@@ -17,7 +17,7 @@ public:
     AdderClient(std::shared_ptr<Channel> channel)
         : stub_(Adder::NewStub(channel)) {}
 
-    int Add(int num1, int num2) {
+    [[nodiscard]] int Add(int num1, int num2) {
         // Prepare request
         addRequest request;
         request.set_num1(num1);
@@ -42,6 +42,31 @@ public:
         }
     }
 
+    bool getMultiplicationTable(int num,int n){
+        first_grpc_project::tableRequest request;
+        request.set_num(num);
+        request.set_n(n);
+
+        //response container
+        first_grpc_project::tableResponse res;
+
+        //Client context for optional settings (e.g. timeouts)
+        ClientContext context;
+
+        //Make the RPC Call
+        std::unique_ptr<grpc::ClientReader<first_grpc_project::tableResponse>> reader = stub_->getMultiplicationTable(&context,request);
+        while(reader->Read(&res)){
+            std::cout<<res.num()<<" * "<<res.n()<<" = "<<res.result()<<std::endl;
+        }
+        Status status = reader->Finish();
+        if(status.ok()){
+            std::cout<<"RPC Finished Successfully"<<std::endl;
+            return true;
+        }
+        std::cout<<"RPC Failed"<<std::endl;
+        return false;
+    }
+
 private:
     std::unique_ptr<Adder::Stub> stub_;
 };
@@ -58,7 +83,11 @@ int main(int argc, char** argv) {
     }
 
     std::cout << "Sending request: " << num1 << " + " << num2 << std::endl;
-    client.Add(num1, num2);
+    int res = client.Add(num1, num2);
+
+    std::cout<<"Sending getMultiplicationTable request : "<<res<<" "<<10<<std::endl;
+    bool ret = client.getMultiplicationTable(res,10);
+    
 
     return 0;
 }

@@ -28,6 +28,8 @@ service Adder {
   // Sends an addRequest
   rpc add (addRequest) returns (addResponse) {}
 
+  rpc getMultiplicationTable(tableRequest) returns (stream tableResponse){}
+
 }
 
 // The request message containing the user's name.
@@ -40,3 +42,18 @@ message addRequest {
 message addResponse {
   int32 result = 1;
 }
+
+
+//multiplication request
+message tableRequest{
+  int32 num = 1;
+  int32 n = 2;
+}
+
+//multiplication response
+message tableResponse{
+  int32 num = 1;
+  int32 n = 2;
+  int32 result = 3;
+}
+

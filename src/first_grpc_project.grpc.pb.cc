@@ -23,6 +23,7 @@ namespace first_grpc_project {
 
 static const char* Adder_method_names[] = {
   "/first_grpc_project.Adder/add",
+  "/first_grpc_project.Adder/getMultiplicationTable",
 };
 
 std::unique_ptr< Adder::Stub> Adder::NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options) {
@@ -33,6 +34,7 @@ std::unique_ptr< Adder::Stub> Adder::NewStub(const std::shared_ptr< ::grpc::Chan
 
 Adder::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options)
   : channel_(channel), rpcmethod_add_(Adder_method_names[0], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_getMultiplicationTable_(Adder_method_names[1], options.suffix_for_stats(),::grpc::internal::RpcMethod::SERVER_STREAMING, channel)
   {}
 
 ::grpc::Status Adder::Stub::add(::grpc::ClientContext* context, const ::first_grpc_project::addRequest& request, ::first_grpc_project::addResponse* response) {
@@ -58,6 +60,22 @@ void Adder::Stub::async::add(::grpc::ClientContext* context, const ::first_grpc_
   return result;
 }
 
+::grpc::ClientReader< ::first_grpc_project::tableResponse>* Adder::Stub::getMultiplicationTableRaw(::grpc::ClientContext* context, const ::first_grpc_project::tableRequest& request) {
+  return ::grpc::internal::ClientReaderFactory< ::first_grpc_project::tableResponse>::Create(channel_.get(), rpcmethod_getMultiplicationTable_, context, request);
+}
+
+void Adder::Stub::async::getMultiplicationTable(::grpc::ClientContext* context, const ::first_grpc_project::tableRequest* request, ::grpc::ClientReadReactor< ::first_grpc_project::tableResponse>* reactor) {
+  ::grpc::internal::ClientCallbackReaderFactory< ::first_grpc_project::tableResponse>::Create(stub_->channel_.get(), stub_->rpcmethod_getMultiplicationTable_, context, request, reactor);
+}
+
+::grpc::ClientAsyncReader< ::first_grpc_project::tableResponse>* Adder::Stub::AsyncgetMultiplicationTableRaw(::grpc::ClientContext* context, const ::first_grpc_project::tableRequest& request, ::grpc::CompletionQueue* cq, void* tag) {
+  return ::grpc::internal::ClientAsyncReaderFactory< ::first_grpc_project::tableResponse>::Create(channel_.get(), cq, rpcmethod_getMultiplicationTable_, context, request, true, tag);
+}
+
+::grpc::ClientAsyncReader< ::first_grpc_project::tableResponse>* Adder::Stub::PrepareAsyncgetMultiplicationTableRaw(::grpc::ClientContext* context, const ::first_grpc_project::tableRequest& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncReaderFactory< ::first_grpc_project::tableResponse>::Create(channel_.get(), cq, rpcmethod_getMultiplicationTable_, context, request, false, nullptr);
+}
+
 Adder::Service::Service() {
   AddMethod(new ::grpc::internal::RpcServiceMethod(
       Adder_method_names[0],
@@ -69,6 +87,16 @@ Adder::Service::Service() {
              ::first_grpc_project::addResponse* resp) {
                return service->add(ctx, req, resp);
              }, this)));
+  AddMethod(new ::grpc::internal::RpcServiceMethod(
+      Adder_method_names[1],
+      ::grpc::internal::RpcMethod::SERVER_STREAMING,
+      new ::grpc::internal::ServerStreamingHandler< Adder::Service, ::first_grpc_project::tableRequest, ::first_grpc_project::tableResponse>(
+          [](Adder::Service* service,
+             ::grpc::ServerContext* ctx,
+             const ::first_grpc_project::tableRequest* req,
+             ::grpc::ServerWriter<::first_grpc_project::tableResponse>* writer) {
+               return service->getMultiplicationTable(ctx, req, writer);
+             }, this)));
 }
 
 Adder::Service::~Service() {
@@ -78,6 +106,13 @@ Adder::Service::~Service() {
   (void) context;
   (void) request;
   (void) response;
+  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+}
+
+::grpc::Status Adder::Service::getMultiplicationTable(::grpc::ServerContext* context, const ::first_grpc_project::tableRequest* request, ::grpc::ServerWriter< ::first_grpc_project::tableResponse>* writer) {
+  (void) context;
+  (void) request;
+  (void) writer;
   return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
 }
 
