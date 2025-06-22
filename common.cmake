@@ -16,6 +16,7 @@
 # Assumes protobuf and gRPC have been installed using cmake.
 # See cmake_externalproject/CMakeLists.txt for all-in-one cmake build
 # that automatically builds all the dependencies before building route_guide.
+include(FetchContent)
 
 cmake_minimum_required(VERSION 3.16)
 
@@ -29,6 +30,11 @@ endif()
 find_package(Threads REQUIRED)
 
 find_package(absl REQUIRED)
+
+#find_package(OpenSSL REQUIRED)
+#set(OPENSSL_ROOT_DIR /opt/openssl-3)
+#set(OPENSSL_USE_STATIC_LIBS TRUE)  # optional
+
 
 
 
@@ -60,4 +66,15 @@ if(CMAKE_CROSSCOMPILING)
 else()
   set(_GRPC_CPP_PLUGIN_EXECUTABLE $<TARGET_FILE:gRPC::grpc_cpp_plugin>)
 endif()
+
+FetchContent_Declare(
+  jwt-cpp
+  GIT_REPOSITORY https://github.com/Thalhammer/jwt-cpp.git
+  GIT_TAG        v0.6.0
+)
+
+set(JWT_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+FetchContent_MakeAvailable(jwt-cpp)
+
+
 

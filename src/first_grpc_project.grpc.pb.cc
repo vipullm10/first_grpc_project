@@ -19,9 +19,11 @@
 #include <grpcpp/server_context.h>
 #include <grpcpp/impl/service_type.h>
 #include <grpcpp/support/sync_stream.h>
+#include <grpcpp/ports_def.inc>
 namespace first_grpc_project {
 
 static const char* Adder_method_names[] = {
+  "/first_grpc_project.Adder/login",
   "/first_grpc_project.Adder/add",
   "/first_grpc_project.Adder/getMultiplicationTable",
 };
@@ -33,9 +35,33 @@ std::unique_ptr< Adder::Stub> Adder::NewStub(const std::shared_ptr< ::grpc::Chan
 }
 
 Adder::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options)
-  : channel_(channel), rpcmethod_add_(Adder_method_names[0], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_getMultiplicationTable_(Adder_method_names[1], options.suffix_for_stats(),::grpc::internal::RpcMethod::SERVER_STREAMING, channel)
+  : channel_(channel), rpcmethod_login_(Adder_method_names[0], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_add_(Adder_method_names[1], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_getMultiplicationTable_(Adder_method_names[2], options.suffix_for_stats(),::grpc::internal::RpcMethod::SERVER_STREAMING, channel)
   {}
+
+::grpc::Status Adder::Stub::login(::grpc::ClientContext* context, const ::first_grpc_project::loginRequest& request, ::first_grpc_project::loginResponse* response) {
+  return ::grpc::internal::BlockingUnaryCall< ::first_grpc_project::loginRequest, ::first_grpc_project::loginResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_login_, context, request, response);
+}
+
+void Adder::Stub::async::login(::grpc::ClientContext* context, const ::first_grpc_project::loginRequest* request, ::first_grpc_project::loginResponse* response, std::function<void(::grpc::Status)> f) {
+  ::grpc::internal::CallbackUnaryCall< ::first_grpc_project::loginRequest, ::first_grpc_project::loginResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_login_, context, request, response, std::move(f));
+}
+
+void Adder::Stub::async::login(::grpc::ClientContext* context, const ::first_grpc_project::loginRequest* request, ::first_grpc_project::loginResponse* response, ::grpc::ClientUnaryReactor* reactor) {
+  ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_login_, context, request, response, reactor);
+}
+
+::grpc::ClientAsyncResponseReader< ::first_grpc_project::loginResponse>* Adder::Stub::PrepareAsyncloginRaw(::grpc::ClientContext* context, const ::first_grpc_project::loginRequest& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::first_grpc_project::loginResponse, ::first_grpc_project::loginRequest, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_login_, context, request);
+}
+
+::grpc::ClientAsyncResponseReader< ::first_grpc_project::loginResponse>* Adder::Stub::AsyncloginRaw(::grpc::ClientContext* context, const ::first_grpc_project::loginRequest& request, ::grpc::CompletionQueue* cq) {
+  auto* result =
+    this->PrepareAsyncloginRaw(context, request, cq);
+  result->StartCall();
+  return result;
+}
 
 ::grpc::Status Adder::Stub::add(::grpc::ClientContext* context, const ::first_grpc_project::addRequest& request, ::first_grpc_project::addResponse* response) {
   return ::grpc::internal::BlockingUnaryCall< ::first_grpc_project::addRequest, ::first_grpc_project::addResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_add_, context, request, response);
@@ -80,6 +106,16 @@ Adder::Service::Service() {
   AddMethod(new ::grpc::internal::RpcServiceMethod(
       Adder_method_names[0],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
+      new ::grpc::internal::RpcMethodHandler< Adder::Service, ::first_grpc_project::loginRequest, ::first_grpc_project::loginResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
+          [](Adder::Service* service,
+             ::grpc::ServerContext* ctx,
+             const ::first_grpc_project::loginRequest* req,
+             ::first_grpc_project::loginResponse* resp) {
+               return service->login(ctx, req, resp);
+             }, this)));
+  AddMethod(new ::grpc::internal::RpcServiceMethod(
+      Adder_method_names[1],
+      ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< Adder::Service, ::first_grpc_project::addRequest, ::first_grpc_project::addResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
           [](Adder::Service* service,
              ::grpc::ServerContext* ctx,
@@ -88,7 +124,7 @@ Adder::Service::Service() {
                return service->add(ctx, req, resp);
              }, this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Adder_method_names[1],
+      Adder_method_names[2],
       ::grpc::internal::RpcMethod::SERVER_STREAMING,
       new ::grpc::internal::ServerStreamingHandler< Adder::Service, ::first_grpc_project::tableRequest, ::first_grpc_project::tableResponse>(
           [](Adder::Service* service,
@@ -100,6 +136,13 @@ Adder::Service::Service() {
 }
 
 Adder::Service::~Service() {
+}
+
+::grpc::Status Adder::Service::login(::grpc::ServerContext* context, const ::first_grpc_project::loginRequest* request, ::first_grpc_project::loginResponse* response) {
+  (void) context;
+  (void) request;
+  (void) response;
+  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
 }
 
 ::grpc::Status Adder::Service::add(::grpc::ServerContext* context, const ::first_grpc_project::addRequest* request, ::first_grpc_project::addResponse* response) {
@@ -118,4 +161,5 @@ Adder::Service::~Service() {
 
 
 }  // namespace first_grpc_project
+#include <grpcpp/ports_undef.inc>
 

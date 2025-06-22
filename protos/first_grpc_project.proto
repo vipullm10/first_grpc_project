@@ -25,6 +25,8 @@ package first_grpc_project;
 
 service Adder {
 
+  rpc login(loginRequest) returns (loginResponse) {}
+
   // Sends an addRequest
   rpc add (addRequest) returns (addResponse) {}
 
@@ -32,12 +34,21 @@ service Adder {
 
 }
 
+message loginRequest {
+  string username = 1;
+  string password = 2;
+}
+
+message loginResponse {
+  string jwt_token = 1;
+}
+
 // The request message containing the user's name.
 message addRequest {
   int32 num1 = 1;
   int32 num2 = 2;
 }
-
+   
 // The response message containing the greetings
 message addResponse {
   int32 result = 1;
@@ -56,4 +67,6 @@ message tableResponse{
   int32 n = 2;
   int32 result = 3;
 }
+
+
 

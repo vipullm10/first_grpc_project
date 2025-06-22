@@ -12,7 +12,7 @@
       "generator": "Unix Makefiles",
       "binaryDir": "${workspaceFolder}/build",
       "cacheVariables": {
-        "CMAKE_PREFIX_PATH": "/Users/vipuldevnani/grpc_install",
+        "CMAKE_PREFIX_PATH": "/Users/vipuldevnani/grpc_install;/opt/openssl-3",
         "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
       }
     }

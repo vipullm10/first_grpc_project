@@ -65,14 +65,16 @@ add_dependencies(server generate_grpc_files)
 target_include_directories(server PRIVATE ${GEN_INCLUDE_DIR})
 target_link_libraries(server
   fgp_grpc_proto
+  jwt-cpp::jwt-cpp 
 )
 
-add_executable(server_async "${CMAKE_SOURCE_DIR}/src/server_async.cpp" "${CMAKE_SOURCE_DIR}/src/socket_client.cpp" "${CMAKE_SOURCE_DIR}/src/ServiceImpl.cpp")
+add_executable(server_async "${CMAKE_SOURCE_DIR}/src/server_async.cpp" "${CMAKE_SOURCE_DIR}/src/socket_client.cpp" "${CMAKE_SOURCE_DIR}/src/ServiceImpl.cpp" "${CMAKE_SOURCE_DIR}/src/jwt_utils.cpp")
 add_dependencies(server_async generate_grpc_files)
 
 target_include_directories(server_async PRIVATE ${GEN_INCLUDE_DIR})
 target_link_libraries(server_async
   fgp_grpc_proto
+  jwt-cpp::jwt-cpp 
 )
 
 
@@ -82,4 +84,5 @@ add_dependencies(client generate_grpc_files)
 target_include_directories(client PRIVATE ${GEN_INCLUDE_DIR})
 target_link_libraries(client
   fgp_grpc_proto
+  jwt-cpp::jwt-cpp 
 )

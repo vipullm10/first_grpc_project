@@ -53,6 +53,13 @@ class Adder final {
   class StubInterface {
    public:
     virtual ~StubInterface() {}
+    virtual ::grpc::Status login(::grpc::ClientContext* context, const ::first_grpc_project::loginRequest& request, ::first_grpc_project::loginResponse* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::first_grpc_project::loginResponse>> Asynclogin(::grpc::ClientContext* context, const ::first_grpc_project::loginRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::first_grpc_project::loginResponse>>(AsyncloginRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::first_grpc_project::loginResponse>> PrepareAsynclogin(::grpc::ClientContext* context, const ::first_grpc_project::loginRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::first_grpc_project::loginResponse>>(PrepareAsyncloginRaw(context, request, cq));
+    }
     // Sends an addRequest
     virtual ::grpc::Status add(::grpc::ClientContext* context, const ::first_grpc_project::addRequest& request, ::first_grpc_project::addResponse* response) = 0;
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::first_grpc_project::addResponse>> Asyncadd(::grpc::ClientContext* context, const ::first_grpc_project::addRequest& request, ::grpc::CompletionQueue* cq) {
@@ -73,6 +80,8 @@ class Adder final {
     class async_interface {
      public:
       virtual ~async_interface() {}
+      virtual void login(::grpc::ClientContext* context, const ::first_grpc_project::loginRequest* request, ::first_grpc_project::loginResponse* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void login(::grpc::ClientContext* context, const ::first_grpc_project::loginRequest* request, ::first_grpc_project::loginResponse* response, ::grpc::ClientUnaryReactor* reactor) = 0;
       // Sends an addRequest
       virtual void add(::grpc::ClientContext* context, const ::first_grpc_project::addRequest* request, ::first_grpc_project::addResponse* response, std::function<void(::grpc::Status)>) = 0;
       virtual void add(::grpc::ClientContext* context, const ::first_grpc_project::addRequest* request, ::first_grpc_project::addResponse* response, ::grpc::ClientUnaryReactor* reactor) = 0;
@@ -82,6 +91,8 @@ class Adder final {
     virtual class async_interface* async() { return nullptr; }
     class async_interface* experimental_async() { return async(); }
    private:
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::first_grpc_project::loginResponse>* AsyncloginRaw(::grpc::ClientContext* context, const ::first_grpc_project::loginRequest& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::first_grpc_project::loginResponse>* PrepareAsyncloginRaw(::grpc::ClientContext* context, const ::first_grpc_project::loginRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::first_grpc_project::addResponse>* AsyncaddRaw(::grpc::ClientContext* context, const ::first_grpc_project::addRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::first_grpc_project::addResponse>* PrepareAsyncaddRaw(::grpc::ClientContext* context, const ::first_grpc_project::addRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientReaderInterface< ::first_grpc_project::tableResponse>* getMultiplicationTableRaw(::grpc::ClientContext* context, const ::first_grpc_project::tableRequest& request) = 0;
@@ -91,6 +102,13 @@ class Adder final {
   class Stub final : public StubInterface {
    public:
     Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options = ::grpc::StubOptions());
+    ::grpc::Status login(::grpc::ClientContext* context, const ::first_grpc_project::loginRequest& request, ::first_grpc_project::loginResponse* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::first_grpc_project::loginResponse>> Asynclogin(::grpc::ClientContext* context, const ::first_grpc_project::loginRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::first_grpc_project::loginResponse>>(AsyncloginRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::first_grpc_project::loginResponse>> PrepareAsynclogin(::grpc::ClientContext* context, const ::first_grpc_project::loginRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::first_grpc_project::loginResponse>>(PrepareAsyncloginRaw(context, request, cq));
+    }
     ::grpc::Status add(::grpc::ClientContext* context, const ::first_grpc_project::addRequest& request, ::first_grpc_project::addResponse* response) override;
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::first_grpc_project::addResponse>> Asyncadd(::grpc::ClientContext* context, const ::first_grpc_project::addRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::first_grpc_project::addResponse>>(AsyncaddRaw(context, request, cq));
@@ -110,6 +128,8 @@ class Adder final {
     class async final :
       public StubInterface::async_interface {
      public:
+      void login(::grpc::ClientContext* context, const ::first_grpc_project::loginRequest* request, ::first_grpc_project::loginResponse* response, std::function<void(::grpc::Status)>) override;
+      void login(::grpc::ClientContext* context, const ::first_grpc_project::loginRequest* request, ::first_grpc_project::loginResponse* response, ::grpc::ClientUnaryReactor* reactor) override;
       void add(::grpc::ClientContext* context, const ::first_grpc_project::addRequest* request, ::first_grpc_project::addResponse* response, std::function<void(::grpc::Status)>) override;
       void add(::grpc::ClientContext* context, const ::first_grpc_project::addRequest* request, ::first_grpc_project::addResponse* response, ::grpc::ClientUnaryReactor* reactor) override;
       void getMultiplicationTable(::grpc::ClientContext* context, const ::first_grpc_project::tableRequest* request, ::grpc::ClientReadReactor< ::first_grpc_project::tableResponse>* reactor) override;
@@ -124,11 +144,14 @@ class Adder final {
    private:
     std::shared_ptr< ::grpc::ChannelInterface> channel_;
     class async async_stub_{this};
+    ::grpc::ClientAsyncResponseReader< ::first_grpc_project::loginResponse>* AsyncloginRaw(::grpc::ClientContext* context, const ::first_grpc_project::loginRequest& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::first_grpc_project::loginResponse>* PrepareAsyncloginRaw(::grpc::ClientContext* context, const ::first_grpc_project::loginRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::first_grpc_project::addResponse>* AsyncaddRaw(::grpc::ClientContext* context, const ::first_grpc_project::addRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::first_grpc_project::addResponse>* PrepareAsyncaddRaw(::grpc::ClientContext* context, const ::first_grpc_project::addRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientReader< ::first_grpc_project::tableResponse>* getMultiplicationTableRaw(::grpc::ClientContext* context, const ::first_grpc_project::tableRequest& request) override;
     ::grpc::ClientAsyncReader< ::first_grpc_project::tableResponse>* AsyncgetMultiplicationTableRaw(::grpc::ClientContext* context, const ::first_grpc_project::tableRequest& request, ::grpc::CompletionQueue* cq, void* tag) override;
     ::grpc::ClientAsyncReader< ::first_grpc_project::tableResponse>* PrepareAsyncgetMultiplicationTableRaw(::grpc::ClientContext* context, const ::first_grpc_project::tableRequest& request, ::grpc::CompletionQueue* cq) override;
+    const ::grpc::internal::RpcMethod rpcmethod_login_;
     const ::grpc::internal::RpcMethod rpcmethod_add_;
     const ::grpc::internal::RpcMethod rpcmethod_getMultiplicationTable_;
   };
@@ -138,9 +161,30 @@ class Adder final {
    public:
     Service();
     virtual ~Service();
+    virtual ::grpc::Status login(::grpc::ServerContext* context, const ::first_grpc_project::loginRequest* request, ::first_grpc_project::loginResponse* response);
     // Sends an addRequest
     virtual ::grpc::Status add(::grpc::ServerContext* context, const ::first_grpc_project::addRequest* request, ::first_grpc_project::addResponse* response);
     virtual ::grpc::Status getMultiplicationTable(::grpc::ServerContext* context, const ::first_grpc_project::tableRequest* request, ::grpc::ServerWriter< ::first_grpc_project::tableResponse>* writer);
+  };
+  template <class BaseClass>
+  class WithAsyncMethod_login : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithAsyncMethod_login() {
+      ::grpc::Service::MarkMethodAsync(0);
+    }
+    ~WithAsyncMethod_login() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status login(::grpc::ServerContext* /*context*/, const ::first_grpc_project::loginRequest* /*request*/, ::first_grpc_project::loginResponse* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void Requestlogin(::grpc::ServerContext* context, ::first_grpc_project::loginRequest* request, ::grpc::ServerAsyncResponseWriter< ::first_grpc_project::loginResponse>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(0, context, request, response, new_call_cq, notification_cq, tag);
+    }
   };
   template <class BaseClass>
   class WithAsyncMethod_add : public BaseClass {
@@ -148,7 +192,7 @@ class Adder final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithAsyncMethod_add() {
-      ::grpc::Service::MarkMethodAsync(0);
+      ::grpc::Service::MarkMethodAsync(1);
     }
     ~WithAsyncMethod_add() override {
       BaseClassMustBeDerivedFromService(this);
@@ -159,7 +203,7 @@ class Adder final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void Requestadd(::grpc::ServerContext* context, ::first_grpc_project::addRequest* request, ::grpc::ServerAsyncResponseWriter< ::first_grpc_project::addResponse>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(0, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(1, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -168,7 +212,7 @@ class Adder final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithAsyncMethod_getMultiplicationTable() {
-      ::grpc::Service::MarkMethodAsync(1);
+      ::grpc::Service::MarkMethodAsync(2);
     }
     ~WithAsyncMethod_getMultiplicationTable() override {
       BaseClassMustBeDerivedFromService(this);
@@ -179,23 +223,50 @@ class Adder final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestgetMultiplicationTable(::grpc::ServerContext* context, ::first_grpc_project::tableRequest* request, ::grpc::ServerAsyncWriter< ::first_grpc_project::tableResponse>* writer, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncServerStreaming(1, context, request, writer, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncServerStreaming(2, context, request, writer, new_call_cq, notification_cq, tag);
     }
   };
-  typedef WithAsyncMethod_add<WithAsyncMethod_getMultiplicationTable<Service > > AsyncService;
+  typedef WithAsyncMethod_login<WithAsyncMethod_add<WithAsyncMethod_getMultiplicationTable<Service > > > AsyncService;
+  template <class BaseClass>
+  class WithCallbackMethod_login : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithCallbackMethod_login() {
+      ::grpc::Service::MarkMethodCallback(0,
+          new ::grpc::internal::CallbackUnaryHandler< ::first_grpc_project::loginRequest, ::first_grpc_project::loginResponse>(
+            [this](
+                   ::grpc::CallbackServerContext* context, const ::first_grpc_project::loginRequest* request, ::first_grpc_project::loginResponse* response) { return this->login(context, request, response); }));}
+    void SetMessageAllocatorFor_login(
+        ::grpc::MessageAllocator< ::first_grpc_project::loginRequest, ::first_grpc_project::loginResponse>* allocator) {
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(0);
+      static_cast<::grpc::internal::CallbackUnaryHandler< ::first_grpc_project::loginRequest, ::first_grpc_project::loginResponse>*>(handler)
+              ->SetMessageAllocator(allocator);
+    }
+    ~WithCallbackMethod_login() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status login(::grpc::ServerContext* /*context*/, const ::first_grpc_project::loginRequest* /*request*/, ::first_grpc_project::loginResponse* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual ::grpc::ServerUnaryReactor* login(
+      ::grpc::CallbackServerContext* /*context*/, const ::first_grpc_project::loginRequest* /*request*/, ::first_grpc_project::loginResponse* /*response*/)  { return nullptr; }
+  };
   template <class BaseClass>
   class WithCallbackMethod_add : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithCallbackMethod_add() {
-      ::grpc::Service::MarkMethodCallback(0,
+      ::grpc::Service::MarkMethodCallback(1,
           new ::grpc::internal::CallbackUnaryHandler< ::first_grpc_project::addRequest, ::first_grpc_project::addResponse>(
             [this](
                    ::grpc::CallbackServerContext* context, const ::first_grpc_project::addRequest* request, ::first_grpc_project::addResponse* response) { return this->add(context, request, response); }));}
     void SetMessageAllocatorFor_add(
         ::grpc::MessageAllocator< ::first_grpc_project::addRequest, ::first_grpc_project::addResponse>* allocator) {
-      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(0);
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(1);
       static_cast<::grpc::internal::CallbackUnaryHandler< ::first_grpc_project::addRequest, ::first_grpc_project::addResponse>*>(handler)
               ->SetMessageAllocator(allocator);
     }
@@ -216,7 +287,7 @@ class Adder final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithCallbackMethod_getMultiplicationTable() {
-      ::grpc::Service::MarkMethodCallback(1,
+      ::grpc::Service::MarkMethodCallback(2,
           new ::grpc::internal::CallbackServerStreamingHandler< ::first_grpc_project::tableRequest, ::first_grpc_project::tableResponse>(
             [this](
                    ::grpc::CallbackServerContext* context, const ::first_grpc_project::tableRequest* request) { return this->getMultiplicationTable(context, request); }));
@@ -232,15 +303,32 @@ class Adder final {
     virtual ::grpc::ServerWriteReactor< ::first_grpc_project::tableResponse>* getMultiplicationTable(
       ::grpc::CallbackServerContext* /*context*/, const ::first_grpc_project::tableRequest* /*request*/)  { return nullptr; }
   };
-  typedef WithCallbackMethod_add<WithCallbackMethod_getMultiplicationTable<Service > > CallbackService;
+  typedef WithCallbackMethod_login<WithCallbackMethod_add<WithCallbackMethod_getMultiplicationTable<Service > > > CallbackService;
   typedef CallbackService ExperimentalCallbackService;
+  template <class BaseClass>
+  class WithGenericMethod_login : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithGenericMethod_login() {
+      ::grpc::Service::MarkMethodGeneric(0);
+    }
+    ~WithGenericMethod_login() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status login(::grpc::ServerContext* /*context*/, const ::first_grpc_project::loginRequest* /*request*/, ::first_grpc_project::loginResponse* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+  };
   template <class BaseClass>
   class WithGenericMethod_add : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithGenericMethod_add() {
-      ::grpc::Service::MarkMethodGeneric(0);
+      ::grpc::Service::MarkMethodGeneric(1);
     }
     ~WithGenericMethod_add() override {
       BaseClassMustBeDerivedFromService(this);
@@ -257,7 +345,7 @@ class Adder final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithGenericMethod_getMultiplicationTable() {
-      ::grpc::Service::MarkMethodGeneric(1);
+      ::grpc::Service::MarkMethodGeneric(2);
     }
     ~WithGenericMethod_getMultiplicationTable() override {
       BaseClassMustBeDerivedFromService(this);
@@ -269,12 +357,32 @@ class Adder final {
     }
   };
   template <class BaseClass>
+  class WithRawMethod_login : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawMethod_login() {
+      ::grpc::Service::MarkMethodRaw(0);
+    }
+    ~WithRawMethod_login() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status login(::grpc::ServerContext* /*context*/, const ::first_grpc_project::loginRequest* /*request*/, ::first_grpc_project::loginResponse* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void Requestlogin(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(0, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
   class WithRawMethod_add : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithRawMethod_add() {
-      ::grpc::Service::MarkMethodRaw(0);
+      ::grpc::Service::MarkMethodRaw(1);
     }
     ~WithRawMethod_add() override {
       BaseClassMustBeDerivedFromService(this);
@@ -285,7 +393,7 @@ class Adder final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void Requestadd(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(0, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(1, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -294,7 +402,7 @@ class Adder final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithRawMethod_getMultiplicationTable() {
-      ::grpc::Service::MarkMethodRaw(1);
+      ::grpc::Service::MarkMethodRaw(2);
     }
     ~WithRawMethod_getMultiplicationTable() override {
       BaseClassMustBeDerivedFromService(this);
@@ -305,8 +413,30 @@ class Adder final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestgetMultiplicationTable(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncWriter< ::grpc::ByteBuffer>* writer, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncServerStreaming(1, context, request, writer, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncServerStreaming(2, context, request, writer, new_call_cq, notification_cq, tag);
     }
+  };
+  template <class BaseClass>
+  class WithRawCallbackMethod_login : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawCallbackMethod_login() {
+      ::grpc::Service::MarkMethodRawCallback(0,
+          new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+            [this](
+                   ::grpc::CallbackServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->login(context, request, response); }));
+    }
+    ~WithRawCallbackMethod_login() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status login(::grpc::ServerContext* /*context*/, const ::first_grpc_project::loginRequest* /*request*/, ::first_grpc_project::loginResponse* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual ::grpc::ServerUnaryReactor* login(
+      ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)  { return nullptr; }
   };
   template <class BaseClass>
   class WithRawCallbackMethod_add : public BaseClass {
@@ -314,7 +444,7 @@ class Adder final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithRawCallbackMethod_add() {
-      ::grpc::Service::MarkMethodRawCallback(0,
+      ::grpc::Service::MarkMethodRawCallback(1,
           new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
             [this](
                    ::grpc::CallbackServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->add(context, request, response); }));
@@ -336,7 +466,7 @@ class Adder final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithRawCallbackMethod_getMultiplicationTable() {
-      ::grpc::Service::MarkMethodRawCallback(1,
+      ::grpc::Service::MarkMethodRawCallback(2,
           new ::grpc::internal::CallbackServerStreamingHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
             [this](
                    ::grpc::CallbackServerContext* context, const::grpc::ByteBuffer* request) { return this->getMultiplicationTable(context, request); }));
@@ -353,12 +483,39 @@ class Adder final {
       ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/)  { return nullptr; }
   };
   template <class BaseClass>
+  class WithStreamedUnaryMethod_login : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithStreamedUnaryMethod_login() {
+      ::grpc::Service::MarkMethodStreamed(0,
+        new ::grpc::internal::StreamedUnaryHandler<
+          ::first_grpc_project::loginRequest, ::first_grpc_project::loginResponse>(
+            [this](::grpc::ServerContext* context,
+                   ::grpc::ServerUnaryStreamer<
+                     ::first_grpc_project::loginRequest, ::first_grpc_project::loginResponse>* streamer) {
+                       return this->Streamedlogin(context,
+                         streamer);
+                  }));
+    }
+    ~WithStreamedUnaryMethod_login() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable regular version of this method
+    ::grpc::Status login(::grpc::ServerContext* /*context*/, const ::first_grpc_project::loginRequest* /*request*/, ::first_grpc_project::loginResponse* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    // replace default version of method with streamed unary
+    virtual ::grpc::Status Streamedlogin(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::first_grpc_project::loginRequest,::first_grpc_project::loginResponse>* server_unary_streamer) = 0;
+  };
+  template <class BaseClass>
   class WithStreamedUnaryMethod_add : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithStreamedUnaryMethod_add() {
-      ::grpc::Service::MarkMethodStreamed(0,
+      ::grpc::Service::MarkMethodStreamed(1,
         new ::grpc::internal::StreamedUnaryHandler<
           ::first_grpc_project::addRequest, ::first_grpc_project::addResponse>(
             [this](::grpc::ServerContext* context,
@@ -379,14 +536,14 @@ class Adder final {
     // replace default version of method with streamed unary
     virtual ::grpc::Status Streamedadd(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::first_grpc_project::addRequest,::first_grpc_project::addResponse>* server_unary_streamer) = 0;
   };
-  typedef WithStreamedUnaryMethod_add<Service > StreamedUnaryService;
+  typedef WithStreamedUnaryMethod_login<WithStreamedUnaryMethod_add<Service > > StreamedUnaryService;
   template <class BaseClass>
   class WithSplitStreamingMethod_getMultiplicationTable : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithSplitStreamingMethod_getMultiplicationTable() {
-      ::grpc::Service::MarkMethodStreamed(1,
+      ::grpc::Service::MarkMethodStreamed(2,
         new ::grpc::internal::SplitServerStreamingHandler<
           ::first_grpc_project::tableRequest, ::first_grpc_project::tableResponse>(
             [this](::grpc::ServerContext* context,
@@ -408,7 +565,7 @@ class Adder final {
     virtual ::grpc::Status StreamedgetMultiplicationTable(::grpc::ServerContext* context, ::grpc::ServerSplitStreamer< ::first_grpc_project::tableRequest,::first_grpc_project::tableResponse>* server_split_streamer) = 0;
   };
   typedef WithSplitStreamingMethod_getMultiplicationTable<Service > SplitStreamedService;
-  typedef WithStreamedUnaryMethod_add<WithSplitStreamingMethod_getMultiplicationTable<Service > > StreamedService;
+  typedef WithStreamedUnaryMethod_login<WithStreamedUnaryMethod_add<WithSplitStreamingMethod_getMultiplicationTable<Service > > > StreamedService;
 };
 
 }  // namespace first_grpc_project
