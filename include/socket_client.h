@@ -34,7 +34,3 @@ int connect_to_server(const char *ip, int port);
 
 // Thread function to read from the socket
 void *client_read_callback(void *args);
-
-// These are used by the callback to communicate with gRPC
-extern grpc::ServerUnaryReactor *ptr;
-extern first_grpc_project::addResponse *ptr_res;

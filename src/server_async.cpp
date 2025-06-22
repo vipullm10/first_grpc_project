@@ -4,97 +4,15 @@
 #include <pthread.h>
 #include "first_grpc_project.grpc.pb.h"
 #include "socket_client.h"
+#include "ServiceImpl.h"
 
 using grpc::Server;
 using grpc::ServerBuilder;
 
-// Use externs from socket_client.cpp
+// Use externs from ServiceImpl.cpp
 extern grpc::ServerUnaryReactor *ptr;
 extern first_grpc_project::addResponse *ptr_res;
 int fd;
-
-class ServiceImpl final : public first_grpc_project::Adder::CallbackService
-{
-public:
-    grpc::ServerUnaryReactor *add(grpc::CallbackServerContext *context, const first_grpc_project::addRequest *req, first_grpc_project::addResponse *res) override
-    {
-        class Reactor : public grpc::ServerUnaryReactor
-        {
-        public:
-            Reactor(const first_grpc_project::addRequest *req, first_grpc_project::addResponse *res)
-            {
-                ptr = this;
-                ptr_res = res;
-                request req_;
-                req_.num1 = req->num1();
-                req_.num2 = req->num2();
-                int sent_bytes = send(fd, &req_, sizeof(request), 0);
-                std::cout << "sent_bytes : " << sent_bytes << " error code : " << errno << std::endl;
-            }
-
-        private:
-            void OnDone() override
-            {
-                std::cout << "RPC Finished" << std::endl;
-                delete this;
-            }
-        };
-        return new Reactor(req, res);
-    }
-
-    grpc::ServerWriteReactor<first_grpc_project::tableResponse> *getMultiplicationTable(grpc::CallbackServerContext *context, const first_grpc_project::tableRequest *req) override
-    {
-        class Multiplier : public grpc::ServerWriteReactor<first_grpc_project::tableResponse>
-        {
-        public:
-            Multiplier(const first_grpc_project::tableRequest *req) : req_(req), i(1), res(new first_grpc_project::tableResponse)
-            {
-                NextWrite();
-            }
-            ~Multiplier()
-            {
-                delete res;
-            }
-
-        private:
-            void NextWrite()
-            {
-                if (i > req_->n())
-                {
-                    Finish(grpc::Status::OK);
-                    return;
-                }
-                res->set_n(i);
-                res->set_num(req_->num());
-                res->set_result(req_->num() * i);
-                StartWrite(res);
-                i++;
-            }
-            void OnWriteDone(bool ok) override
-            {
-                if (!ok)
-                {
-                    Finish(grpc::Status(grpc::StatusCode::UNKNOWN, "Unexpected Failure"));
-                    return;
-                }
-                NextWrite();
-            }
-            void OnDone() override
-            {
-                std::cout << "RPC Completed";
-                delete this;
-            }
-            void OnCancel() override
-            {
-                std::cout << "RPC Cancelled" << std::endl;
-            }
-            int i;
-            const first_grpc_project::tableRequest *req_;
-            first_grpc_project::tableResponse *res;
-        };
-        return new Multiplier(req);
-    }
-};
 
 void RunServer()
 {
