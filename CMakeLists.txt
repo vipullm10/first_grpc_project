@@ -67,7 +67,7 @@ target_link_libraries(server
   fgp_grpc_proto
 )
 
-add_executable(server_async "${CMAKE_SOURCE_DIR}/src/server_async.cpp")
+add_executable(server_async "${CMAKE_SOURCE_DIR}/src/server_async.cpp" "${CMAKE_SOURCE_DIR}/src/socket_client.cpp")
 add_dependencies(server_async generate_grpc_files)
 
 target_include_directories(server_async PRIVATE ${GEN_INCLUDE_DIR})
